@@ -45,7 +45,7 @@ export default function ForgotPasswordPage() {
           </p>
           <Link
             to="/login"
-            className="inline-block bg-red-500 hover:bg-red-600 text-white font-medium py-2.5 px-6 rounded-xl transition-colors"
+            className="inline-block bg-brand-red hover:bg-brand-red-dark text-white font-medium py-2.5 px-6 rounded-xl transition-colors"
           >
             Zurück zur Anmeldung
           </Link>
@@ -58,7 +58,7 @@ export default function ForgotPasswordPage() {
     <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: 'var(--panda-bg)' }}>
       <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-red-light rounded-full mb-4">
             <span className="text-3xl">🐼</span>
           </div>
           <h1 className="text-2xl font-bold text-gray-800">Passwort vergessen?</h1>
@@ -66,7 +66,7 @@ export default function ForgotPasswordPage() {
         </div>
 
         {error && (
-          <div className="flex items-center gap-2 bg-red-50 text-red-700 rounded-lg p-3 mb-4">
+          <div className="flex items-center gap-2 bg-red-50 text-brand-red-dark rounded-lg p-3 mb-4">
             <AlertCircle size={16} />
             <span className="text-sm">{error}</span>
           </div>
@@ -83,14 +83,14 @@ export default function ForgotPasswordPage() {
                 onChange={e => setEmail(e.target.value)}
                 required
                 placeholder="deine@email.de"
-                className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-300"
+                className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-red"
               />
             </div>
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white font-medium py-2.5 rounded-xl transition-colors disabled:opacity-60"
+            className="w-full flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-red-dark text-white font-medium py-2.5 rounded-xl transition-colors disabled:opacity-60"
           >
             <Mail size={18} />
             Reset-Link senden
@@ -98,7 +98,7 @@ export default function ForgotPasswordPage() {
         </form>
 
         <p className="text-center text-sm text-gray-500 mt-4">
-          <Link to="/login" className="inline-flex items-center gap-1 text-red-500 hover:underline font-medium">
+          <Link to="/login" className="inline-flex items-center gap-1 text-brand-red hover:underline font-medium">
             <ArrowLeft size={14} />
             Zurück zur Anmeldung
           </Link>
