@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
   collection, query, where, onSnapshot, doc,
-  updateDoc, getDocs, orderBy, limit, deleteDoc,
+  updateDoc, getDocs, orderBy, limit, deleteDoc, arrayUnion,
 } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { Shield, Trash2, Ban, Check } from 'lucide-react';
@@ -59,7 +59,7 @@ export default function AdminPanel() {
 
   async function muteUserInGroup(userId: string, groupId: string) {
     await updateDoc(doc(db, 'groups', groupId), {
-      mutedMembers: [userId],
+      mutedMembers: arrayUnion(userId),
     });
   }
 
