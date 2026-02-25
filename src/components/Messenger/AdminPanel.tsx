@@ -75,14 +75,14 @@ export default function AdminPanel() {
       </div>
 
       {reports.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 text-center">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-8 text-center">
           <span className="text-5xl block mb-3">🐼</span>
           <p className="text-gray-500">Keine offenen Meldungen.</p>
         </div>
       ) : (
         <div className="space-y-4">
           {reports.map(report => (
-            <div key={report.id} className="bg-white rounded-2xl border border-orange-200 shadow-sm p-5">
+            <div key={report.id} className="bg-white rounded-3xl border border-orange-200 shadow-sm p-5">
               <div className="flex items-center justify-between mb-3">
                 <div>
                   <span className="font-semibold text-gray-800">Meldung</span>

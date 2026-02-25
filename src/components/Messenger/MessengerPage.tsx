@@ -535,7 +535,7 @@ export default function MessengerPage() {
       {/* Create Group Modal */}
       {showCreateGroup && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl">
+          <div className="bg-white rounded-3xl p-6 w-full max-w-sm shadow-xl">
             <h3 className="font-bold text-lg text-gray-800 mb-4">Neue Gruppe erstellen</h3>
             <div className="space-y-3">
               <input
@@ -575,7 +575,7 @@ export default function MessengerPage() {
       {/* Add Member Modal */}
       {showAddMember && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl">
+          <div className="bg-white rounded-3xl p-6 w-full max-w-sm shadow-xl">
             <h3 className="font-bold text-lg text-gray-800 mb-4">Mitglied hinzufügen</h3>
             {addMemberError && (
               <div className="text-brand-red-dark text-sm mb-3">{addMemberError}</div>

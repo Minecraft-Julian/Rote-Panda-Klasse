@@ -187,7 +187,7 @@ export default function HomeworkPage() {
             const myVoteFor = entry.correctionVotes?.includes(currentUser?.uid || '');
             const myVoteAgainst = entry.correctionAgainst?.includes(currentUser?.uid || '');
             return (
-              <div key={entry.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+              <div key={entry.id} className="bg-white rounded-3xl border border-gray-100 shadow-sm p-4">
                 <div className="flex items-start justify-between gap-2 mb-2">
                   <div className="flex items-center gap-2 flex-wrap">
                     <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${subjectColors[entry.subject] || defaultColor}`}>
@@ -268,7 +268,7 @@ export default function HomeworkPage() {
       {/* Add Homework Modal */}
       {showAdd && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-xl">
+          <div className="bg-white rounded-3xl p-6 w-full max-w-md shadow-xl">
             <h3 className="font-bold text-lg text-gray-800 mb-4">Hausaufgabe eintragen</h3>
             <div className="space-y-3">
               <div>
@@ -334,7 +334,7 @@ export default function HomeworkPage() {
       {/* Correction Modal */}
       {correctionEntry && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-xl">
+          <div className="bg-white rounded-3xl p-6 w-full max-w-md shadow-xl">
             <h3 className="font-bold text-lg text-gray-800 mb-2">Korrektur vorschlagen</h3>
             <p className="text-sm text-gray-500 mb-4">
               Wenn {CORRECTION_THRESHOLD} Personen zustimmen, wird die Hausaufgabe automatisch korrigiert.

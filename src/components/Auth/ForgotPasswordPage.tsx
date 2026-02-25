@@ -34,7 +34,7 @@ export default function ForgotPasswordPage() {
   if (success) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: 'var(--panda-bg)' }}>
-        <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md text-center">
+        <div className="bg-white rounded-3xl shadow-xl p-8 w-full max-w-md text-center">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
             <CheckCircle size={32} className="text-green-500" />
           </div>
@@ -56,7 +56,7 @@ export default function ForgotPasswordPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: 'var(--panda-bg)' }}>
-      <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
+      <div className="bg-white rounded-3xl shadow-xl p-8 w-full max-w-md">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-red-light rounded-full mb-4">
             <span className="text-3xl">🐼</span>
