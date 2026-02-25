@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import LoginPage from './components/Auth/LoginPage';
 import RegisterPage from './components/Auth/RegisterPage';
+import ForgotPasswordPage from './components/Auth/ForgotPasswordPage';
 import Navbar from './components/Layout/Navbar';
 import MessengerPage from './components/Messenger/MessengerPage';
 import AdminPanel from './components/Messenger/AdminPanel';
@@ -30,6 +31,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/login" element={currentUser ? <Navigate to="/" replace /> : <LoginPage />} />
       <Route path="/register" element={currentUser ? <Navigate to="/" replace /> : <RegisterPage />} />
+      <Route path="/forgot-password" element={currentUser ? <Navigate to="/" replace /> : <ForgotPasswordPage />} />
       <Route
         path="/"
         element={
