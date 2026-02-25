@@ -1,4 +1,4 @@
-import { ExternalLink, Info } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 // TODO: Replace with the actual timetable website URL once provided
 const TIMETABLE_URL = import.meta.env.VITE_TIMETABLE_URL || '';
@@ -7,7 +7,7 @@ export default function TimetablePage() {
   return (
     <div className="max-w-4xl mx-auto p-4">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Stundenplan</h1>
+        <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">🐼 Stundenplan</h1>
         {TIMETABLE_URL && (
           <a
             href={TIMETABLE_URL}
@@ -33,7 +33,7 @@ export default function TimetablePage() {
         </div>
       ) : (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center">
-          <Info size={48} className="mx-auto text-gray-300 mb-4" />
+          <span className="text-5xl block mb-4">🐼</span>
           <h2 className="text-lg font-semibold text-gray-700 mb-2">Stundenplan-URL nicht konfiguriert</h2>
           <p className="text-gray-500 text-sm max-w-md mx-auto">
             Bitte trage die URL des Stundenplans in der Umgebungsvariable{' '}

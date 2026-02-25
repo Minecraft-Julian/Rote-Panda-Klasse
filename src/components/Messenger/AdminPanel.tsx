@@ -71,12 +71,12 @@ export default function AdminPanel() {
     <div className="max-w-4xl mx-auto p-4">
       <div className="flex items-center gap-3 mb-6">
         <Shield size={24} className="text-red-500" />
-        <h1 className="text-2xl font-bold text-gray-800">Admin Panel</h1>
+        <h1 className="text-2xl font-bold text-gray-800">🐼 Admin Panel</h1>
       </div>
 
       {reports.length === 0 ? (
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 text-center">
-          <Check size={48} className="mx-auto text-green-400 mb-3" />
+          <span className="text-5xl block mb-3">🐼</span>
           <p className="text-gray-500">Keine offenen Meldungen.</p>
         </div>
       ) : (

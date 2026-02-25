@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+:root {
+  --panda-red: #FF6B6B;
+  --panda-red-dark: #e05252;
+  --panda-red-light: #FFECEC;
+  --panda-bg: #FFF5F5;
+  --panda-black: #1a1a1a;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -8,7 +16,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  background-color: #f9fafb;
+  background-color: var(--panda-bg);
 }
 
 #root {
