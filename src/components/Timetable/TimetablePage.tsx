@@ -22,7 +22,7 @@ export default function TimetablePage() {
       </div>
 
       {TIMETABLE_URL ? (
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
           <iframe
             src={TIMETABLE_URL}
             title="Stundenplan"
@@ -32,7 +32,7 @@ export default function TimetablePage() {
           />
         </div>
       ) : (
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center">
+        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 text-center">
           <span className="text-5xl block mb-4">🐼</span>
           <h2 className="text-lg font-semibold text-gray-700 mb-2">Stundenplan-URL nicht konfiguriert</h2>
           <p className="text-gray-500 text-sm max-w-md mx-auto">

@@ -107,7 +107,7 @@ export default function ClassListPage() {
 
       {/* Edit Own Profile */}
       {editing && (
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-6">
+        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-5 mb-6">
           <h2 className="font-semibold text-gray-700 mb-4">Meine Kontaktdaten bearbeiten</h2>
           <p className="text-sm text-gray-500 mb-4">Alle Felder sind optional. Du entscheidest, was du teilen möchtest.</p>
           <div className="space-y-3">
@@ -167,7 +167,7 @@ export default function ClassListPage() {
           return (
             <div
               key={member.uid}
-              className={`bg-white rounded-2xl shadow-sm border p-4 flex items-start gap-4 ${
+              className={`bg-white rounded-3xl shadow-sm border p-4 flex items-start gap-4 ${
                 isSick ? 'border-orange-200 bg-orange-50/30' : 'border-gray-100'
               } ${isMe ? 'ring-2 ring-brand-red' : ''}`}
             >
