@@ -1,13 +1,73 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rote-Panda-Klasse</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>🐼 Roter-Panda-Klasse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="transparent-logo.svg" alt="Logo">
+      <h2>Roter-Panda</h2>
+    </div>
+
+    <nav>
+      <button onclick="showPage('messenger')">💬 Messenger</button>
+      <button onclick="showPage('classlist')">👥 Klassenliste</button>
+      <button onclick="showPage('homework')">📚 Hausaufgaben</button>
+      <button onclick="showPage('timetable')">🗓️ Stundenplan</button>
+    </nav>
+  </aside>
+
+  <!-- Content -->
+  <main class="content">
+
+    <!-- Messenger -->
+    <section id="messenger" class="page">
+      <h1>💬 Messenger</h1>
+      <div class="chat-box" id="messages"></div>
+      <div class="chat-input">
+        <input type="text" id="messageInput" placeholder="Nachricht eingeben...">
+        <button onclick="sendMessage()">Senden</button>
+      </div>
+    </section>
+
+    <!-- Klassenliste -->
+    <section id="classlist" class="page hidden">
+      <h1>👥 Klassenliste</h1>
+      <ul id="classMembers"></ul>
+      <div class="input-row">
+        <input type="text" id="newMember" placeholder="Name hinzufügen">
+        <button onclick="addMember()">+</button>
+      </div>
+    </section>
+
+    <!-- Hausaufgaben -->
+    <section id="homework" class="page hidden">
+      <h1>📚 Hausaufgaben</h1>
+      <ul id="homeworkList"></ul>
+      <div class="input-row">
+        <input type="text" id="homeworkInput" placeholder="Neue Hausaufgabe">
+        <button onclick="addHomework()">+</button>
+      </div>
+    </section>
+
+    <!-- Stundenplan -->
+    <section id="timetable" class="page hidden">
+      <h1>🗓️ Stundenplan</h1>
+      <iframe src="https://example.com" class="iframe"></iframe>
+    </section>
+
+  </main>
+
+</div>
+
+<script src="app.js"></script>
+</body>
 </html>
