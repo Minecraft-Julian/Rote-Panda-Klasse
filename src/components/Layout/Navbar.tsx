@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { MessageSquare, Users, Calendar, BookOpen, LogOut, PawPrint } from 'lucide-react';
+import { MessageSquare, Users, Calendar, BookOpen, LogOut } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
 export default function Navbar() {
@@ -19,10 +19,10 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <nav className="bg-white border-b-2 border-red-100 sticky top-0 z-50 shadow-sm">
       <div className="max-w-6xl mx-auto px-4 flex items-center h-14 gap-2">
         <NavLink to="/" className="flex items-center gap-2 font-bold text-red-600 mr-4 shrink-0">
-          <PawPrint size={22} />
+          <span className="text-xl">🐼</span>
           <span className="hidden sm:inline">Roter Panda</span>
         </NavLink>
 
@@ -32,10 +32,10 @@ export default function Navbar() {
               key={item.to}
               to={item.to}
               className={({ isActive }) =>
-                `flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                `flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium transition-colors ${
                   isActive
-                    ? 'bg-red-50 text-red-600'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                    ? 'bg-red-100 text-red-600'
+                    : 'text-gray-600 hover:bg-red-50 hover:text-red-500'
                 }`
               }
             >
@@ -50,7 +50,7 @@ export default function Navbar() {
             <img
               src={currentUser.photoURL}
               alt={currentUser.displayName || 'User'}
-              className="w-8 h-8 rounded-full object-cover"
+              className="w-8 h-8 rounded-full object-cover ring-2 ring-red-100"
             />
           ) : (
             <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-bold text-sm">
@@ -62,7 +62,7 @@ export default function Navbar() {
           </span>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-1.5 text-gray-500 hover:text-red-600 transition-colors p-2 rounded-lg hover:bg-red-50"
+            className="flex items-center gap-1.5 text-gray-500 hover:text-red-600 transition-colors p-2 rounded-xl hover:bg-red-50"
             title="Abmelden"
           >
             <LogOut size={18} />

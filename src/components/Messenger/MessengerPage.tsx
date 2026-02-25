@@ -290,9 +290,9 @@ export default function MessengerPage() {
   const isGroupOwner = selectedGroup?.createdBy === currentUser?.uid;
 
   return (
-    <div className="flex h-[calc(100vh-56px)] bg-gray-50">
+    <div className="flex h-[calc(100vh-56px)]" style={{ backgroundColor: 'var(--panda-bg)' }}>
       {/* Group Sidebar */}
-      <div className={`${selectedGroup ? 'hidden md:flex' : 'flex'} flex-col w-full md:w-72 bg-white border-r border-gray-200`}>
+      <div className={`${selectedGroup ? 'hidden md:flex' : 'flex'} flex-col w-full md:w-72 bg-white border-r border-red-100`}>
         <div className="p-4 border-b border-gray-100">
           <div className="flex items-center justify-between mb-3">
             <h2 className="font-semibold text-gray-800">Gruppen</h2>
@@ -350,7 +350,7 @@ export default function MessengerPage() {
       {selectedGroup ? (
         <div className="flex flex-col flex-1 min-w-0">
           {/* Chat Header */}
-          <div className="bg-white border-b border-gray-200 px-4 py-3 flex items-center gap-3">
+          <div className="bg-white border-b border-red-100 px-4 py-3 flex items-center gap-3">
             <button
               onClick={() => setSelectedGroup(null)}
               className="md:hidden text-gray-500 hover:text-gray-700 p-1"
@@ -494,7 +494,7 @@ export default function MessengerPage() {
           )}
 
           {/* Message Input */}
-          <div className="bg-white border-t border-gray-200 px-4 py-3 flex items-center gap-2">
+          <div className="bg-white border-t border-red-100 px-4 py-3 flex items-center gap-2">
             <input
               ref={fileInputRef}
               type="file"
@@ -527,7 +527,7 @@ export default function MessengerPage() {
         </div>
       ) : (
         <div className="flex-1 flex items-center justify-center text-gray-400 flex-col gap-3">
-          <span className="text-5xl">💬</span>
+          <span className="text-5xl">🐼</span>
           <p className="text-lg">Wähle eine Gruppe aus oder erstelle eine neue</p>
         </div>
       )}

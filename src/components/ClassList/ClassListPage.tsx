@@ -82,7 +82,7 @@ export default function ClassListPage() {
   return (
     <div className="max-w-3xl mx-auto p-4">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Klassenliste</h1>
+        <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">🐼 Klassenliste</h1>
         <div className="flex items-center gap-2">
           <button
             onClick={toggleSick}

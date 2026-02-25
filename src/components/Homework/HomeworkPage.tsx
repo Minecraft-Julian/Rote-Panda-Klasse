@@ -5,7 +5,7 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
-import { Plus, Search, BookOpen, Calendar, MoreHorizontal, ThumbsUp, ThumbsDown, Check } from 'lucide-react';
+import { Plus, Search, Calendar, MoreHorizontal, ThumbsUp, ThumbsDown, Check } from 'lucide-react';
 
 const SUBJECTS = [
   'Mathematik', 'Deutsch', 'Englisch', 'Physik', 'Chemie', 'Biologie',
@@ -143,7 +143,7 @@ export default function HomeworkPage() {
     <div className="max-w-3xl mx-auto p-4">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Hausaufgaben</h1>
+        <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">🐼 Hausaufgaben</h1>
         <button
           onClick={() => setShowAdd(true)}
           className="flex items-center gap-2 bg-red-500 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-red-600 transition-colors"
@@ -178,7 +178,7 @@ export default function HomeworkPage() {
       {/* Homework List */}
       {filtered.length === 0 ? (
         <div className="text-center py-16 text-gray-400">
-          <BookOpen size={48} className="mx-auto mb-3 opacity-50" />
+          <span className="text-5xl block mb-3">🐼</span>
           <p>{search || subjectFilter ? 'Keine Hausaufgaben gefunden.' : 'Noch keine Hausaufgaben eingetragen.'}</p>
         </div>
       ) : (
