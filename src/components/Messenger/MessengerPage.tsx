@@ -292,13 +292,13 @@ export default function MessengerPage() {
   return (
     <div className="flex h-[calc(100vh-56px)]" style={{ backgroundColor: 'var(--panda-bg)' }}>
       {/* Group Sidebar */}
-      <div className={`${selectedGroup ? 'hidden md:flex' : 'flex'} flex-col w-full md:w-72 bg-white border-r border-red-100`}>
+      <div className={`${selectedGroup ? 'hidden md:flex' : 'flex'} flex-col w-full md:w-72 bg-white border-r border-brand-red-light`}>
         <div className="p-4 border-b border-gray-100">
           <div className="flex items-center justify-between mb-3">
             <h2 className="font-semibold text-gray-800">Gruppen</h2>
             <button
               onClick={() => setShowCreateGroup(true)}
-              className="p-1.5 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+              className="p-1.5 text-brand-red hover:bg-brand-red-light rounded-lg transition-colors"
               title="Neue Gruppe"
             >
               <Plus size={18} />
@@ -311,7 +311,7 @@ export default function MessengerPage() {
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
               placeholder="Gruppe suchen..."
-              className="w-full pl-8 pr-3 py-2 bg-gray-50 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-200"
+              className="w-full pl-8 pr-3 py-2 bg-gray-50 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-red"
             />
           </div>
         </div>
@@ -327,10 +327,10 @@ export default function MessengerPage() {
                 key={group.id}
                 onClick={() => setSelectedGroup(group)}
                 className={`w-full text-left px-4 py-3 flex items-center gap-3 hover:bg-gray-50 transition-colors border-b border-gray-50 ${
-                  selectedGroup?.id === group.id ? 'bg-red-50' : ''
+                  selectedGroup?.id === group.id ? 'bg-brand-red-light' : ''
                 }`}
               >
-                <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-bold shrink-0">
+                <div className="w-10 h-10 rounded-full bg-brand-red-light flex items-center justify-center text-brand-red-dark font-bold shrink-0">
                   {group.name[0].toUpperCase()}
                 </div>
                 <div className="min-w-0">
@@ -350,14 +350,14 @@ export default function MessengerPage() {
       {selectedGroup ? (
         <div className="flex flex-col flex-1 min-w-0">
           {/* Chat Header */}
-          <div className="bg-white border-b border-red-100 px-4 py-3 flex items-center gap-3">
+          <div className="bg-white border-b border-brand-red-light px-4 py-3 flex items-center gap-3">
             <button
               onClick={() => setSelectedGroup(null)}
               className="md:hidden text-gray-500 hover:text-gray-700 p-1"
             >
               <ChevronLeft size={20} />
             </button>
-            <div className="w-9 h-9 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-bold">
+            <div className="w-9 h-9 rounded-full bg-brand-red-light flex items-center justify-center text-brand-red-dark font-bold">
               {selectedGroup.name[0].toUpperCase()}
             </div>
             <div className="flex-1 min-w-0">
@@ -367,7 +367,7 @@ export default function MessengerPage() {
             <div className="flex items-center gap-1">
               <button
                 onClick={() => setShowAddMember(true)}
-                className="p-2 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                className="p-2 text-gray-500 hover:text-brand-red hover:bg-brand-red-light rounded-lg transition-colors"
                 title="Mitglied hinzufügen"
               >
                 <Users size={18} />
@@ -375,7 +375,7 @@ export default function MessengerPage() {
               {isGroupOwner && (
                 <button
                   onClick={() => deleteGroup(selectedGroup)}
-                  className="p-2 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                  className="p-2 text-gray-500 hover:text-brand-red hover:bg-brand-red-light rounded-lg transition-colors"
                   title="Gruppe löschen"
                 >
                   <Trash2 size={18} />
@@ -395,14 +395,14 @@ export default function MessengerPage() {
                       <span className="text-xs text-gray-500 mb-1 ml-1">{msg.senderName}</span>
                     )}
                     {msg.replyToText && (
-                      <div className={`text-xs px-2 py-1 rounded-t-lg border-l-2 border-red-400 bg-gray-100 text-gray-500 max-w-full truncate mb-0.5`}>
+                      <div className={`text-xs px-2 py-1 rounded-t-lg border-l-2 border-brand-red bg-gray-100 text-gray-500 max-w-full truncate mb-0.5`}>
                         ↩ {msg.replyToText}
                       </div>
                     )}
                     <div
                       className={`relative px-4 py-2 rounded-2xl text-sm ${
                         isOwn
-                          ? 'bg-red-500 text-white rounded-br-sm'
+                          ? 'bg-brand-red text-white rounded-br-sm'
                           : 'bg-white text-gray-800 rounded-bl-sm shadow-sm'
                       } ${msg.reported ? 'opacity-60' : ''}`}
                     >
@@ -415,11 +415,11 @@ export default function MessengerPage() {
                       )}
                       {msg.fileUrl && msg.fileType === 'file' && (
                         <a href={msg.fileUrl} target="_blank" rel="noopener noreferrer"
-                           className={`flex items-center gap-1 underline ${isOwn ? 'text-white' : 'text-red-500'}`}>
+                           className={`flex items-center gap-1 underline ${isOwn ? 'text-white' : 'text-brand-red'}`}>
                           📎 {msg.fileName}
                         </a>
                       )}
-                      <span className={`text-xs mt-1 block ${isOwn ? 'text-red-100' : 'text-gray-400'}`}>
+                      <span className={`text-xs mt-1 block ${isOwn ? 'text-brand-red-light' : 'text-gray-400'}`}>
                         {msg.timestamp?.toDate
                           ? msg.timestamp.toDate().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })
                           : ''}
@@ -438,7 +438,7 @@ export default function MessengerPage() {
                       </button>
                       <button
                         onClick={() => deleteMessageForMe(msg.id)}
-                        className="p-1 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded"
+                        className="p-1 text-gray-400 hover:text-brand-red hover:bg-brand-red-light rounded"
                         title="Für mich löschen"
                       >
                         <Trash2 size={14} />
@@ -485,7 +485,7 @@ export default function MessengerPage() {
           {/* Reply Preview */}
           {replyTo && (
             <div className="mx-4 mb-2 flex items-center gap-2 bg-gray-100 rounded-lg px-3 py-2 text-sm text-gray-600">
-              <Reply size={14} className="text-red-400 shrink-0" />
+              <Reply size={14} className="text-brand-red shrink-0" />
               <span className="truncate flex-1">Antwort auf: {replyTo.text || '[Datei]'}</span>
               <button onClick={() => setReplyTo(null)} className="text-gray-400 hover:text-gray-600">
                 <X size={14} />
@@ -494,7 +494,7 @@ export default function MessengerPage() {
           )}
 
           {/* Message Input */}
-          <div className="bg-white border-t border-red-100 px-4 py-3 flex items-center gap-2">
+          <div className="bg-white border-t border-brand-red-light px-4 py-3 flex items-center gap-2">
             <input
               ref={fileInputRef}
               type="file"
@@ -503,7 +503,7 @@ export default function MessengerPage() {
             />
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+              className="p-2 text-gray-400 hover:text-brand-red hover:bg-brand-red-light rounded-lg transition-colors"
               title="Datei senden (max. 1 GB)"
             >
               <Paperclip size={20} />
@@ -514,12 +514,12 @@ export default function MessengerPage() {
               onChange={e => setMessageText(e.target.value)}
               onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } }}
               placeholder="Nachricht schreiben..."
-              className="flex-1 bg-gray-50 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-200"
+              className="flex-1 bg-gray-50 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-red"
             />
             <button
               onClick={sendMessage}
               disabled={!messageText.trim()}
-              className="p-2 bg-red-500 text-white rounded-xl hover:bg-red-600 disabled:opacity-40 transition-colors"
+              className="p-2 bg-brand-red text-white rounded-xl hover:bg-brand-red-dark disabled:opacity-40 transition-colors"
             >
               <Send size={18} />
             </button>
@@ -543,14 +543,14 @@ export default function MessengerPage() {
                 value={newGroupName}
                 onChange={e => setNewGroupName(e.target.value)}
                 placeholder="Gruppenname *"
-                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-300"
+                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-red"
               />
               <input
                 type="text"
                 value={newGroupDesc}
                 onChange={e => setNewGroupDesc(e.target.value)}
                 placeholder="Beschreibung (optional)"
-                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-300"
+                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-red"
               />
             </div>
             <div className="flex gap-2 mt-4">
@@ -563,7 +563,7 @@ export default function MessengerPage() {
               <button
                 onClick={createGroup}
                 disabled={!newGroupName.trim()}
-                className="flex-1 py-2 rounded-xl bg-red-500 text-white hover:bg-red-600 disabled:opacity-40"
+                className="flex-1 py-2 rounded-xl bg-brand-red text-white hover:bg-brand-red-dark disabled:opacity-40"
               >
                 Erstellen
               </button>
@@ -578,14 +578,14 @@ export default function MessengerPage() {
           <div className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl">
             <h3 className="font-bold text-lg text-gray-800 mb-4">Mitglied hinzufügen</h3>
             {addMemberError && (
-              <div className="text-red-600 text-sm mb-3">{addMemberError}</div>
+              <div className="text-brand-red-dark text-sm mb-3">{addMemberError}</div>
             )}
             <input
               type="email"
               value={memberEmail}
               onChange={e => setMemberEmail(e.target.value)}
               placeholder="E-Mail des Nutzers"
-              className="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-300 mb-4"
+              className="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-red mb-4"
             />
             <div className="flex gap-2">
               <button
@@ -597,7 +597,7 @@ export default function MessengerPage() {
               <button
                 onClick={addMember}
                 disabled={!memberEmail.trim()}
-                className="flex-1 py-2 rounded-xl bg-red-500 text-white hover:bg-red-600 disabled:opacity-40"
+                className="flex-1 py-2 rounded-xl bg-brand-red text-white hover:bg-brand-red-dark disabled:opacity-40"
               >
                 Hinzufügen
               </button>

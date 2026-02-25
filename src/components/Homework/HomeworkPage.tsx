@@ -146,7 +146,7 @@ export default function HomeworkPage() {
         <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">🐼 Hausaufgaben</h1>
         <button
           onClick={() => setShowAdd(true)}
-          className="flex items-center gap-2 bg-red-500 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-red-600 transition-colors"
+          className="flex items-center gap-2 bg-brand-red text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-brand-red-dark transition-colors"
         >
           <Plus size={16} />
           Hinzufügen
@@ -162,13 +162,13 @@ export default function HomeworkPage() {
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Hausaufgaben suchen..."
-            className="w-full pl-9 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-red-200"
+            className="w-full pl-9 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-red"
           />
         </div>
         <select
           value={subjectFilter}
           onChange={e => setSubjectFilter(e.target.value)}
-          className="border border-gray-200 rounded-xl px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-red-200"
+          className="border border-gray-200 rounded-xl px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-red"
         >
           <option value="">Alle Fächer</option>
           {SUBJECTS.map(s => <option key={s} value={s}>{s}</option>)}
@@ -243,8 +243,8 @@ export default function HomeworkPage() {
                         onClick={() => voteAgainstCorrection(entry)}
                         className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg transition-colors ${
                           myVoteAgainst
-                            ? 'bg-red-500 text-white'
-                            : 'bg-red-100 text-red-700 hover:bg-red-200'
+                            ? 'bg-brand-red text-white'
+                            : 'bg-brand-red-light text-brand-red-dark hover:bg-brand-red-light'
                         }`}
                       >
                         <ThumbsDown size={12} />
@@ -276,7 +276,7 @@ export default function HomeworkPage() {
                 <select
                   value={form.subject}
                   onChange={e => setForm(f => ({ ...f, subject: e.target.value }))}
-                  className="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-300"
+                  className="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-red"
                 >
                   <option value="">Fach wählen...</option>
                   {SUBJECTS.map(s => <option key={s} value={s}>{s}</option>)}
@@ -289,7 +289,7 @@ export default function HomeworkPage() {
                   onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
                   placeholder="z.B. Seite 45, Aufgabe 3a-c"
                   rows={3}
-                  className="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-300 resize-none"
+                  className="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-red resize-none"
                 />
               </div>
               <div>
@@ -299,7 +299,7 @@ export default function HomeworkPage() {
                   value={form.notes}
                   onChange={e => setForm(f => ({ ...f, notes: e.target.value }))}
                   placeholder="Sonstige Hinweise..."
-                  className="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-300"
+                  className="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-red"
                 />
               </div>
               <div>
@@ -308,7 +308,7 @@ export default function HomeworkPage() {
                   type="date"
                   value={form.dueDate}
                   onChange={e => setForm(f => ({ ...f, dueDate: e.target.value }))}
-                  className="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-300"
+                  className="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-red"
                 />
               </div>
             </div>
@@ -322,7 +322,7 @@ export default function HomeworkPage() {
               <button
                 onClick={addHomework}
                 disabled={!form.subject || !form.description.trim()}
-                className="flex-1 py-2 rounded-xl bg-red-500 text-white hover:bg-red-600 disabled:opacity-40"
+                className="flex-1 py-2 rounded-xl bg-brand-red text-white hover:bg-brand-red-dark disabled:opacity-40"
               >
                 Eintragen
               </button>
@@ -348,7 +348,7 @@ export default function HomeworkPage() {
               onChange={e => setCorrectionText(e.target.value)}
               placeholder="Was ist die richtige Aufgabe?"
               rows={3}
-              className="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-300 resize-none mb-4"
+              className="w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-red resize-none mb-4"
             />
             <div className="flex gap-2">
               <button

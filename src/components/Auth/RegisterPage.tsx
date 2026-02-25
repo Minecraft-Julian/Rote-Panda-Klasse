@@ -74,7 +74,7 @@ export default function RegisterPage() {
           </p>
           <Link
             to="/login"
-            className="inline-block bg-red-500 hover:bg-red-600 text-white font-medium py-2.5 px-6 rounded-xl transition-colors"
+            className="inline-block bg-brand-red hover:bg-brand-red-dark text-white font-medium py-2.5 px-6 rounded-xl transition-colors"
           >
             Zur Anmeldung
           </Link>
@@ -87,15 +87,15 @@ export default function RegisterPage() {
     <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: 'var(--panda-bg)' }}>
       <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
-            <span className="text-3xl">🐼</span>
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-red-light rounded-full mb-4">
+            <img src="/logo.svg" alt="Rote-Panda-Klasse" className="w-10 h-10" />
           </div>
           <h1 className="text-2xl font-bold text-gray-800">Konto erstellen</h1>
-          <p className="text-gray-500 mt-1">Tritt der Roter Panda Klasse bei!</p>
+          <p className="text-gray-500 mt-1">Tritt der Rote-Panda-Klasse bei!</p>
         </div>
 
         {error && (
-          <div className="flex items-center gap-2 bg-red-50 text-red-700 rounded-lg p-3 mb-4">
+          <div className="flex items-center gap-2 bg-red-50 text-brand-red-dark rounded-lg p-3 mb-4">
             <AlertCircle size={16} />
             <span className="text-sm">{error}</span>
           </div>
@@ -136,7 +136,7 @@ export default function RegisterPage() {
                 onChange={e => setEmail(e.target.value)}
                 required
                 placeholder="deine@email.de"
-                className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-300"
+                className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-red"
               />
             </div>
           </div>
@@ -150,7 +150,7 @@ export default function RegisterPage() {
                 onChange={e => setUsername(e.target.value)}
                 required
                 placeholder="DeinName"
-                className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-300"
+                className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-red"
               />
             </div>
           </div>
@@ -164,7 +164,7 @@ export default function RegisterPage() {
                 onChange={e => setPassword(e.target.value)}
                 required
                 placeholder="Mindestens 6 Zeichen"
-                className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-300"
+                className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-red"
               />
             </div>
           </div>
@@ -178,14 +178,14 @@ export default function RegisterPage() {
                 onChange={e => setConfirmPassword(e.target.value)}
                 required
                 placeholder="Passwort bestätigen"
-                className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-300"
+                className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-red"
               />
             </div>
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white font-medium py-2.5 rounded-xl transition-colors disabled:opacity-60"
+            className="w-full flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-red-dark text-white font-medium py-2.5 rounded-xl transition-colors disabled:opacity-60"
           >
             <UserPlus size={18} />
             Registrieren
@@ -194,7 +194,7 @@ export default function RegisterPage() {
 
         <p className="text-center text-sm text-gray-500 mt-4">
           Bereits ein Konto?{' '}
-          <Link to="/login" className="text-red-500 hover:underline font-medium">
+          <Link to="/login" className="text-brand-red hover:underline font-medium">
             Anmelden
           </Link>
         </p>

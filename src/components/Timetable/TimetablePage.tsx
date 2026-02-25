@@ -13,7 +13,7 @@ export default function TimetablePage() {
             href={TIMETABLE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm text-red-500 hover:underline"
+            className="flex items-center gap-2 text-sm text-brand-red hover:underline"
           >
             <ExternalLink size={16} />
             Extern öffnen
@@ -37,7 +37,7 @@ export default function TimetablePage() {
           <h2 className="text-lg font-semibold text-gray-700 mb-2">Stundenplan-URL nicht konfiguriert</h2>
           <p className="text-gray-500 text-sm max-w-md mx-auto">
             Bitte trage die URL des Stundenplans in der Umgebungsvariable{' '}
-            <code className="bg-gray-100 px-1.5 py-0.5 rounded text-red-600">VITE_TIMETABLE_URL</code>{' '}
+            <code className="bg-gray-100 px-1.5 py-0.5 rounded text-brand-red-dark">VITE_TIMETABLE_URL</code>{' '}
             ein, um den Stundenplan hier anzuzeigen.
           </p>
           <div className="mt-4 p-4 bg-gray-50 rounded-xl text-left text-sm text-gray-600 max-w-sm mx-auto">

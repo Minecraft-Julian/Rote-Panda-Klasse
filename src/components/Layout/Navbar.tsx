@@ -19,11 +19,11 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-white border-b-2 border-red-100 sticky top-0 z-50 shadow-sm">
+    <nav className="bg-white border-b-2 border-brand-red-light sticky top-0 z-50 shadow-sm">
       <div className="max-w-6xl mx-auto px-4 flex items-center h-14 gap-2">
-        <NavLink to="/" className="flex items-center gap-2 font-bold text-red-600 mr-4 shrink-0">
-          <span className="text-xl">🐼</span>
-          <span className="hidden sm:inline">Roter Panda</span>
+        <NavLink to="/" className="flex items-center gap-2 font-bold text-brand-red-dark mr-4 shrink-0">
+          <img src="/logo.svg" alt="Rote-Panda-Klasse Logo" className="w-7 h-7" />
+          <span className="hidden sm:inline">Rote-Panda-Klasse</span>
         </NavLink>
 
         <div className="flex items-center gap-1 flex-1">
@@ -34,8 +34,8 @@ export default function Navbar() {
               className={({ isActive }) =>
                 `flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium transition-colors ${
                   isActive
-                    ? 'bg-red-100 text-red-600'
-                    : 'text-gray-600 hover:bg-red-50 hover:text-red-500'
+                    ? 'bg-brand-red-light text-brand-red-dark'
+                    : 'text-gray-600 hover:bg-brand-red-light hover:text-brand-red'
                 }`
               }
             >
@@ -50,10 +50,10 @@ export default function Navbar() {
             <img
               src={currentUser.photoURL}
               alt={currentUser.displayName || 'User'}
-              className="w-8 h-8 rounded-full object-cover ring-2 ring-red-100"
+              className="w-8 h-8 rounded-full object-cover ring-2 ring-brand-red-light"
             />
           ) : (
-            <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-bold text-sm">
+            <div className="w-8 h-8 rounded-full bg-brand-red-light flex items-center justify-center text-brand-red-dark font-bold text-sm">
               {(currentUser?.displayName || currentUser?.email || 'U')[0].toUpperCase()}
             </div>
           )}
@@ -62,7 +62,7 @@ export default function Navbar() {
           </span>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-1.5 text-gray-500 hover:text-red-600 transition-colors p-2 rounded-xl hover:bg-red-50"
+            className="flex items-center gap-1.5 text-gray-500 hover:text-brand-red-dark transition-colors p-2 rounded-xl hover:bg-brand-red-light"
             title="Abmelden"
           >
             <LogOut size={18} />
