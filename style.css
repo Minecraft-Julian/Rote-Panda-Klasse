@@ -15,7 +15,7 @@ body {
   width: 250px;
   background: #7F1D1D;
   color: white;
-  display: flex;
+  display: none; /* Versteckt standardmäßig */
   flex-direction: column;
   padding: 20px;
 }

@@ -7,7 +7,13 @@ let messageCountToday = 0;
 // Initialize app
 document.addEventListener('DOMContentLoaded', function() {
   loadData();
-  showPage('login');
+  if (currentUser) {
+    showSidebar();
+    showPage('messenger');
+  } else {
+    hideSidebar();
+    showPage('login');
+  }
 });
 
 // Data management
@@ -16,7 +22,6 @@ function loadData() {
   const userData = localStorage.getItem('userData');
   if (userData) {
     currentUser = JSON.parse(userData);
-    showPage('messenger');
   }
 
   // Load class members
@@ -44,13 +49,24 @@ function showPage(pageId) {
   document.getElementById(pageId).classList.remove("hidden");
 }
 
+function showSidebar() {
+  document.querySelector('.sidebar').style.display = 'flex';
+}
+
+function hideSidebar() {
+  document.querySelector('.sidebar').style.display = 'none';
+}
+
 // Login
 function googleLogin() {
   // Simulate Google login
   currentUser = { name: 'User via Google', email: 'user@gmail.com' };
   saveData('userData', currentUser);
-  alert('Angemeldet mit Google!');
-  setTimeout(() => showPage('messenger'), 1000);
+  setAlert('login', 'Angemeldet mit Google! Weiterleitung…', 'success');
+  setTimeout(() => {
+    showSidebar();
+    showPage('messenger');
+  }, 1000);
 }
 
 function emailLogin(event) {
@@ -71,7 +87,10 @@ function emailLogin(event) {
   currentUser = { name: email.split('@')[0], email: email };
   saveData('userData', currentUser);
   setAlert('login', 'Login erfolgreich! Weiterleitung…', 'success');
-  setTimeout(() => showPage('messenger'), 600);
+  setTimeout(() => {
+    showSidebar();
+    showPage('messenger');
+  }, 600);
 }
 
 // Helper functions
