@@ -57,6 +57,13 @@ function hideSidebar() {
   document.querySelector('.sidebar').style.display = 'none';
 }
 
+function logout() {
+  AUTH.clearSession && AUTH.clearSession();
+  currentUser = null;
+  hideSidebar();
+  showPage('login');
+}
+
 // Login
 function googleLogin() {
   // Simulate Google login
@@ -105,24 +112,108 @@ function isValidEmail(v) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 }
 
-// Password eye toggle
-document.addEventListener('DOMContentLoaded', function() {
-  loadData();
-  showPage('login');
+// Auth helpers (AUTH + OTP) and UI wiring
+const AUTH = {
+  users() { return JSON.parse(localStorage.getItem('rp_users') || '[]'); },
+  saveUsers(u) { localStorage.setItem('rp_users', JSON.stringify(u)); },
+  session() { return JSON.parse(localStorage.getItem('userData') || 'null'); },
+  setSession(s) { localStorage.setItem('userData', JSON.stringify(s)); currentUser = s; },
+  clearSession() { localStorage.removeItem('userData'); currentUser = null; },
+  makeSalt() { const arr = new Uint8Array(8); crypto.getRandomValues(arr); return Array.from(arr, b=>b.toString(16).padStart(2,'0')).join(''); },
+  hashPw(pw, salt) { let h=5381; const input = salt + pw + salt; for(let i=0;i<input.length;i++) h = ((h<<5)+h) ^ input.charCodeAt(i); return salt + '$' + (h>>>0).toString(36); },
+  register(name, email, pw) {
+    const users = AUTH.users(); const norm = email.toLowerCase().trim();
+    if (!name) return { error: 'Bitte Namen angeben.' };
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(norm)) return { error: 'Ungültige E-Mail.' };
+    if (pw.length < 8) return { error: 'Passwort mindestens 8 Zeichen.' };
+    if (users.find(u=>u.email===norm)) return { error: 'E-Mail bereits registriert.' };
+    const salt = AUTH.makeSalt(); const pwHash = AUTH.hashPw(pw, salt);
+    users.push({ id: crypto.randomUUID(), name: name.trim(), email: norm, pwHash, emailVerified: false });
+    AUTH.saveUsers(users); return { success: true };
+  },
+  login(email, pw) {
+    const norm = email.toLowerCase().trim(); const users = AUTH.users(); const u = users.find(x=>x.email===norm);
+    if (!u) return { error: 'E-Mail oder Passwort falsch.' };
+    const salt = u.pwHash.split('$')[0]; if (AUTH.hashPw(pw, salt) !== u.pwHash) return { error: 'E-Mail oder Passwort falsch.' };
+    AUTH.setSession({ name: u.name, email: u.email }); return { success: true };
+  },
+  markVerified(email) { const users = AUTH.users(); const u = users.find(x=>x.email===email.toLowerCase().trim()); if (u) { u.emailVerified = true; AUTH.saveUsers(users); } }
+};
 
+const OTP = {
+  generate() { return String(Math.floor(10000 + Math.random()*90000)); },
+  store(email, code, type) {
+    const all = JSON.parse(localStorage.getItem('rp_otps') || '{}'); all[email.toLowerCase().trim()] = { code, type, exp: Date.now() + 10*60*1000 }; localStorage.setItem('rp_otps', JSON.stringify(all));
+  },
+  verify(email, code) {
+    const all = JSON.parse(localStorage.getItem('rp_otps') || '{}'); const entry = all[email.toLowerCase().trim()];
+    if (!entry) return { error: 'Kein Code gefunden.' };
+    if (Date.now() > entry.exp) return { error: 'Code abgelaufen.' };
+    if (entry.code !== code) return { error: 'Falscher Code.' };
+    delete all[email.toLowerCase().trim()]; localStorage.setItem('rp_otps', JSON.stringify(all)); return { success: true, type: entry.type };
+  }
+};
+
+// Auth screen management inside the login page
+let currentAuthScreen = 'login';
+let pendingEmail = '';
+
+function showScreen(name, dir) {
+  const prev = document.getElementById('screen-' + currentAuthScreen);
+  const next = document.getElementById('screen-' + name);
+  if (!next || name === currentAuthScreen) return;
+  if (prev) prev.classList.remove('active');
+  next.classList.add('active');
+  currentAuthScreen = name;
+  const al = next.querySelector('.alert'); if (al) { al.textContent=''; al.className='alert'; }
+}
+
+// Wire UI events once DOM ready
+document.addEventListener('DOMContentLoaded', function() {
+  // Password eye toggles
   document.querySelectorAll('.pw-eye').forEach(eye => {
     eye.addEventListener('click', () => {
       const inp = document.getElementById(eye.dataset.target);
-      if (!inp) return;
-      const show = inp.type === 'password';
-      inp.type = show ? 'text' : 'password';
-      eye.textContent = show ? '🙈' : '👁';
-      eye.setAttribute('aria-label', show ? 'Passwort verbergen' : 'Passwort anzeigen');
+      if (!inp) return; const show = inp.type === 'password'; inp.type = show ? 'text' : 'password'; eye.textContent = show ? '🙈' : '👁';
     });
   });
 
+  // Delegate auth-link clicks
+  document.addEventListener('click', e => {
+    const link = e.target.closest('.auth-link[data-goto]'); if (!link) return;
+    e.preventDefault(); showScreen(link.dataset.goto, link.dataset.dir || 'forward');
+  });
+
   // Login form
-  document.getElementById('login-form').addEventListener('submit', emailLogin);
+  const lf = document.getElementById('login-form'); if (lf) lf.addEventListener('submit', e => {
+    e.preventDefault(); const email = document.getElementById('login-email').value.trim(); const pw = document.getElementById('login-password').value;
+    if (!isValidEmail(email)) return setAlert('login','Bitte gib eine gültige E-Mail-Adresse ein.','error'); if (!pw) return setAlert('login','Bitte gib dein Passwort ein.','error');
+    const res = AUTH.login(email,pw); if (!res.success) return setAlert('login', res.error, 'error'); setAlert('login','Login erfolgreich!','success'); AUTH.setSession({ name: email.split('@')[0], email }); setTimeout(()=>{ showSidebar(); showPage('messenger'); }, 400);
+  });
+
+  // Signup
+  const sf = document.getElementById('signup-form'); if (sf) sf.addEventListener('submit', e => {
+    e.preventDefault(); const name = document.getElementById('signup-name').value.trim(); const email = document.getElementById('signup-email').value.trim(); const pw = document.getElementById('signup-password').value; const confirm = document.getElementById('signup-confirm').value;
+    if (!name) return setAlert('signup','Bitte Namen eingeben.','error'); if (!isValidEmail(email)) return setAlert('signup','Ungültige E-Mail.','error'); if (pw.length<8) return setAlert('signup','Passwort min. 8 Zeichen.','error'); if (pw!==confirm) return setAlert('signup','Passwörter stimmen nicht überein.','error');
+    const res = AUTH.register(name,email,pw); if (!res.success) return setAlert('signup', res.error, 'error'); pendingEmail = email; OTP.store(email, OTP.generate(), 'verify'); console.log('[OTP] Code for', email, JSON.parse(localStorage.getItem('rp_otps'))[email]); setAlert('signup','Registrierung erfolgreich! Prüfe den Code.','success'); setTimeout(()=>showScreen('otp'),800);
+  });
+
+  // OTP verify
+  const otpBtn = document.getElementById('otp-verify-btn'); if (otpBtn) otpBtn.addEventListener('click', () => {
+    const code = document.getElementById('otp-code').value.trim(); if (!code) return setAlert('otp','Bitte Code eingeben.','error'); const res = OTP.verify(pendingEmail, code); if (!res.success) return setAlert('otp', res.error, 'error'); if (res.type==='verify') { AUTH.markVerified(pendingEmail); setAlert('otp','E-Mail verifiziert! Du kannst dich einloggen.','success'); setTimeout(()=>showScreen('login'),800); } else { setAlert('otp','Code akzeptiert.','success'); }
+  });
+
+  // Resend OTP
+  const resend = document.getElementById('otp-resend'); if (resend) resend.addEventListener('click', (e)=>{ e.preventDefault(); if(!pendingEmail) return; const code=OTP.generate(); OTP.store(pendingEmail, code, 'verify'); console.log('[OTP] resent code for', pendingEmail, code); setAlert('otp','Neuer Code gesendet (Konsole).','success'); });
+
+  // Forgot form
+  const ff = document.getElementById('forgot-form'); if (ff) ff.addEventListener('submit', e=>{ e.preventDefault(); const email = document.getElementById('forgot-email').value.trim(); if (!isValidEmail(email)) return setAlert('forgot','Bitte gib eine gültige E-Mail-Adresse ein.','error'); pendingEmail = email; const code = OTP.generate(); OTP.store(email, code, 'reset'); console.log('[OTP] reset code for', email, code); setAlert('forgot','Reset-Code gesendet (Konsole).','success'); setTimeout(()=>showScreen('otp'),600); });
+
+  // Reset form
+  const rf = document.getElementById('reset-form'); if (rf) rf.addEventListener('submit', e=>{ e.preventDefault(); const pw = document.getElementById('reset-password').value; const confirm = document.getElementById('reset-confirm').value; if (pw.length<8) return setAlert('reset','Passwort min. 8 Zeichen.','error'); if (pw!==confirm) return setAlert('reset','Passwörter stimmen nicht überein.','error'); const users = AUTH.users(); const u = users.find(x=>x.email===pendingEmail.toLowerCase().trim()); if (!u) return setAlert('reset','E-Mail nicht gefunden.','error'); const salt = AUTH.makeSalt(); u.pwHash = AUTH.hashPw(pw,salt); AUTH.saveUsers(users); setAlert('reset','Passwort geändert!','success'); setTimeout(()=>showScreen('login'),800); });
+
+  // Attach existing simple login form listener (backwards compatibility)
+  const lf2 = document.getElementById('login-form'); if (lf2) lf2.addEventListener('submit', emailLogin);
 });
 
 // Messenger

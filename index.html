@@ -23,43 +23,97 @@
       <button onclick="showPage('classlist')">👥 Klassenliste</button>
       <button onclick="showPage('homework')">📚 Hausaufgaben</button>
       <button onclick="showPage('timetable')">🗓️ Stundenplan</button>
+      <button id="nav-logout" onclick="logout()" style="margin-top:10px;background:#222;border:1px solid #B91C1C;color:#fff;">🔓 Logout</button>
     </nav>
   </aside>
 
   <!-- Content -->
   <main class="content">
 
-    <!-- Anmeldung -->
+    <!-- Anmeldung (Auth-Card mit mehreren Screens) -->
     <section id="login" class="page">
-      <h3>🔑 Willkommen zurück</h3>
-      <p class="auth-subtitle">Logge dich mit deiner E-Mail ein.</p>
-
-      <div id="login-alert" class="alert"></div>
-
-      <form id="login-form" novalidate>
-        <div class="form-group">
-          <label for="login-email">E-Mail</label>
-          <input type="email" id="login-email" placeholder="name@beispiel.de" autocomplete="email">
+      <div class="auth-card">
+        <div class="auth-brand">
+          <img src="transparent-logo.svg" alt="Roter-Panda-Logo">
+          <div class="auth-brand-title">Roter Panda</div>
         </div>
-        <div class="form-group">
-          <label for="login-password">Passwort</label>
-          <div class="input-wrapper">
-            <input type="password" id="login-password" placeholder="Dein Passwort" autocomplete="current-password">
-            <span class="pw-eye" data-target="login-password">👁</span>
-          </div>
-        </div>
-        <div style="text-align:right;margin-bottom:1rem;margin-top:-0.4rem">
-          <a class="auth-link" data-goto="forgot">Passwort vergessen?</a>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%">Einloggen</button>
-      </form>
 
-      <div class="auth-divider"><span>oder</span></div>
-      <button onclick="googleLogin()" class="btn btn-secondary" style="width:100%">Google-Anmeldung</button>
+        <!-- LOGIN -->
+        <div id="screen-login" class="auth-screen active">
+          <h3>🔑 Willkommen zurück</h3>
+          <p class="auth-subtitle">Logge dich mit deiner E-Mail ein.</p>
+          <div id="login-alert" class="alert"></div>
+          <form id="login-form" novalidate>
+            <div class="form-group">
+              <label for="login-email">E-Mail</label>
+              <input type="email" id="login-email" placeholder="name@beispiel.de" autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label for="login-password">Passwort</label>
+              <div class="input-wrapper">
+                <input type="password" id="login-password" placeholder="Dein Passwort" autocomplete="current-password">
+                <span class="pw-eye" data-target="login-password">👁</span>
+              </div>
+            </div>
+            <div style="text-align:right;margin-bottom:1rem;margin-top:-0.4rem">
+              <a class="auth-link" data-goto="forgot">Passwort vergessen?</a>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%">Einloggen</button>
+          </form>
+          <div class="auth-divider"><span>oder</span></div>
+          <button onclick="googleLogin()" class="btn btn-secondary" style="width:100%">Google-Anmeldung</button>
+          <div class="auth-footer-text">Noch kein Account? <a class="auth-link" data-goto="signup">Jetzt registrieren</a></div>
+        </div>
 
-      <div class="auth-footer-text">
-        Noch kein Account? <a class="auth-link" data-goto="signup">Jetzt registrieren</a>
-      </div>
+        <!-- SIGNUP -->
+        <div id="screen-signup" class="auth-screen">
+          <h3>🐼 Account erstellen</h3>
+          <p class="auth-subtitle">Registriere dich für die Klassen-App.</p>
+          <div id="signup-alert" class="alert"></div>
+          <form id="signup-form" novalidate>
+            <div class="form-group"><label for="signup-name">Name</label><input id="signup-name" placeholder="Dein Name"></div>
+            <div class="form-group"><label for="signup-email">E-Mail</label><input id="signup-email" type="email" placeholder="name@beispiel.de"></div>
+            <div class="form-group"><label for="signup-password">Passwort</label><div class="input-wrapper"><input type="password" id="signup-password" placeholder="Mindestens 8 Zeichen"><span class="pw-eye" data-target="signup-password">👁</span></div></div>
+            <div class="form-group"><label for="signup-confirm">Passwort bestätigen</label><div class="input-wrapper"><input type="password" id="signup-confirm" placeholder="Passwort wiederholen"><span class="pw-eye" data-target="signup-confirm">👁</span></div></div>
+            <button type="submit" class="btn btn-primary" style="width:100%">Registrieren</button>
+          </form>
+          <div class="auth-footer-text">Bereits registriert? <a class="auth-link" data-goto="login" data-dir="back">Einloggen</a></div>
+        </div>
+
+        <!-- OTP -->
+        <div id="screen-otp" class="auth-screen">
+          <h3>✉️ Verifizierungscode</h3>
+          <p class="auth-subtitle" id="otp-subtitle">Gib den Code ein, der dir angezeigt wird.</p>
+          <div id="otp-alert" class="alert"></div>
+          <div class="form-group"><label for="otp-code">Code</label><input id="otp-code" placeholder="Code eingeben"></div>
+          <button id="otp-verify-btn" class="btn btn-primary" style="width:100%">Verifizieren</button>
+          <div class="auth-footer-text"><a id="otp-resend" class="auth-link">Code erneut senden</a></div>
+        </div>
+
+        <!-- FORGOT -->
+        <div id="screen-forgot" class="auth-screen">
+          <h3>🔒 Passwort vergessen?</h3>
+          <p class="auth-subtitle">Gib deine E-Mail ein, um einen Reset-Code zu erhalten.</p>
+          <div id="forgot-alert" class="alert"></div>
+          <form id="forgot-form" novalidate>
+            <div class="form-group"><label for="forgot-email">E-Mail</label><input type="email" id="forgot-email" placeholder="name@beispiel.de"></div>
+            <button type="submit" class="btn btn-primary" style="width:100%">Reset-Code senden</button>
+          </form>
+        </div>
+
+        <!-- RESET -->
+        <div id="screen-reset" class="auth-screen">
+          <h3>🔐 Neues Passwort</h3>
+          <p class="auth-subtitle">Wähle ein neues Passwort für deinen Account.</p>
+          <div id="reset-alert" class="alert"></div>
+          <form id="reset-form" novalidate>
+            <div class="form-group"><label for="reset-password">Neues Passwort</label><div class="input-wrapper"><input type="password" id="reset-password" placeholder="Mindestens 8 Zeichen"><span class="pw-eye" data-target="reset-password">👁</span></div></div>
+            <div class="form-group"><label for="reset-confirm">Passwort bestätigen</label><div class="input-wrapper"><input type="password" id="reset-confirm" placeholder="Passwort wiederholen"><span class="pw-eye" data-target="reset-confirm">👁</span></div></div>
+            <button type="submit" class="btn btn-primary" style="width:100%">Passwort ändern</button>
+          </form>
+        </div>
+
+      </div> <!-- /.auth-card -->
     </section>
 
     <!-- Messenger -->
