@@ -49,21 +49,62 @@ function googleLogin() {
   // Simulate Google login
   currentUser = { name: 'User via Google', email: 'user@gmail.com' };
   saveData('userData', currentUser);
-  document.getElementById('loginStatus').textContent = 'Angemeldet mit Google!';
+  alert('Angemeldet mit Google!');
   setTimeout(() => showPage('messenger'), 1000);
 }
 
 function emailLogin(event) {
   event.preventDefault();
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-  
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+
+  if (!isValidEmail(email)) {
+    setAlert('login', 'Bitte gib eine gültige E-Mail-Adresse ein.', 'error');
+    return;
+  }
+  if (!password) {
+    setAlert('login', 'Bitte gib dein Passwort ein.', 'error');
+    return;
+  }
+
   // Simulate login
   currentUser = { name: email.split('@')[0], email: email };
   saveData('userData', currentUser);
-  document.getElementById('loginStatus').textContent = 'Angemeldet!';
-  setTimeout(() => showPage('messenger'), 1000);
+  setAlert('login', 'Login erfolgreich! Weiterleitung…', 'success');
+  setTimeout(() => showPage('messenger'), 600);
 }
+
+// Helper functions
+function setAlert(screenId, msg, type) {
+  const el = document.getElementById(screenId + '-alert');
+  if (!el) return;
+  el.textContent = msg;
+  el.className = `alert alert-${type} show`;
+}
+
+function isValidEmail(v) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+}
+
+// Password eye toggle
+document.addEventListener('DOMContentLoaded', function() {
+  loadData();
+  showPage('login');
+
+  document.querySelectorAll('.pw-eye').forEach(eye => {
+    eye.addEventListener('click', () => {
+      const inp = document.getElementById(eye.dataset.target);
+      if (!inp) return;
+      const show = inp.type === 'password';
+      inp.type = show ? 'text' : 'password';
+      eye.textContent = show ? '🙈' : '👁';
+      eye.setAttribute('aria-label', show ? 'Passwort verbergen' : 'Passwort anzeigen');
+    });
+  });
+
+  // Login form
+  document.getElementById('login-form').addEventListener('submit', emailLogin);
+});
 
 // Messenger
 function createGroup() {

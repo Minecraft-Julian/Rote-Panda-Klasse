@@ -138,37 +138,141 @@ li {
   border: none;
 }
 
-/* Anmeldung */
-.page form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 300px;
+/* Anmeldung Styles */
+.auth-subtitle {
+  color: #666;
+  font-size: 0.85rem;
+  margin-bottom: 1.4rem;
 }
 
-.page form input {
-  padding: 10px;
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 10px 40px 10px 10px;
+  border: 1px solid #ccc;
   border-radius: 8px;
+  font-size: 1rem;
+}
+
+.pw-eye {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.auth-link {
+  color: #B91C1C;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.btn-primary {
+  background: #B91C1C;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #991B1B;
+}
+
+.btn-secondary {
+  background: #f3f4f6;
+  color: #333;
   border: 1px solid #ccc;
 }
 
-.page form button {
-  background: #B91C1C;
-  border: none;
-  color: white;
-  padding: 10px;
-  border-radius: 8px;
-  cursor: pointer;
+.btn-secondary:hover {
+  background: #e5e7eb;
 }
 
-.page button {
-  background: #B91C1C;
-  border: none;
-  color: white;
-  padding: 10px 20px;
+.auth-divider {
+  text-align: center;
+  margin: 1rem 0;
+  position: relative;
+}
+
+.auth-divider span {
+  background: white;
+  padding: 0 10px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.auth-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #ccc;
+}
+
+.auth-footer-text {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.alert {
+  padding: 0.7rem 1rem;
   border-radius: 8px;
-  cursor: pointer;
-  margin-bottom: 20px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  display: none;
+}
+
+.alert.show {
+  display: block;
+}
+
+.alert-success {
+  background: rgba(0,128,0,0.1);
+  border: 1px solid green;
+  color: green;
+}
+
+.alert-error {
+  background: rgba(255,0,0,0.1);
+  border: 1px solid red;
+  color: red;
+}
+
+.alert-info {
+  background: rgba(0,0,255,0.1);
+  border: 1px solid blue;
+  color: blue;
 }
 
 .hidden {

@@ -31,14 +31,35 @@
 
     <!-- Anmeldung -->
     <section id="login" class="page">
-      <h1>🔐 Anmeldung</h1>
-      <button onclick="googleLogin()">Google-Anmeldung</button>
-      <form onsubmit="emailLogin(event)">
-        <input type="email" id="email" placeholder="E-Mail" required>
-        <input type="password" id="password" placeholder="Passwort" required>
-        <button type="submit">Anmelden</button>
+      <h3>🔑 Willkommen zurück</h3>
+      <p class="auth-subtitle">Logge dich mit deiner E-Mail ein.</p>
+
+      <div id="login-alert" class="alert"></div>
+
+      <form id="login-form" novalidate>
+        <div class="form-group">
+          <label for="login-email">E-Mail</label>
+          <input type="email" id="login-email" placeholder="name@beispiel.de" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="login-password">Passwort</label>
+          <div class="input-wrapper">
+            <input type="password" id="login-password" placeholder="Dein Passwort" autocomplete="current-password">
+            <span class="pw-eye" data-target="login-password">👁</span>
+          </div>
+        </div>
+        <div style="text-align:right;margin-bottom:1rem;margin-top:-0.4rem">
+          <a class="auth-link" data-goto="forgot">Passwort vergessen?</a>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%">Einloggen</button>
       </form>
-      <p id="loginStatus"></p>
+
+      <div class="auth-divider"><span>oder</span></div>
+      <button onclick="googleLogin()" class="btn btn-secondary" style="width:100%">Google-Anmeldung</button>
+
+      <div class="auth-footer-text">
+        Noch kein Account? <a class="auth-link" data-goto="signup">Jetzt registrieren</a>
+      </div>
     </section>
 
     <!-- Messenger -->
