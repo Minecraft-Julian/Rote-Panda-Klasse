@@ -18,6 +18,7 @@
     </div>
 
     <nav>
+      <button onclick="showPage('login')">🔐 Anmeldung</button>
       <button onclick="showPage('messenger')">💬 Messenger</button>
       <button onclick="showPage('classlist')">👥 Klassenliste</button>
       <button onclick="showPage('homework')">📚 Hausaufgaben</button>
@@ -28,13 +29,29 @@
   <!-- Content -->
   <main class="content">
 
+    <!-- Anmeldung -->
+    <section id="login" class="page">
+      <h1>🔐 Anmeldung</h1>
+      <button onclick="googleLogin()">Google-Anmeldung</button>
+      <form onsubmit="emailLogin(event)">
+        <input type="email" id="email" placeholder="E-Mail" required>
+        <input type="password" id="password" placeholder="Passwort" required>
+        <button type="submit">Anmelden</button>
+      </form>
+      <p id="loginStatus"></p>
+    </section>
+
     <!-- Messenger -->
-    <section id="messenger" class="page">
+    <section id="messenger" class="page hidden">
       <h1>💬 Messenger</h1>
-      <div class="chat-box" id="messages"></div>
-      <div class="chat-input">
-        <input type="text" id="messageInput" placeholder="Nachricht eingeben...">
-        <button onclick="sendMessage()">Senden</button>
+      <div id="groupsList"></div>
+      <button onclick="createGroup()">Neue Gruppe</button>
+      <div id="chatArea" class="hidden">
+        <div class="chat-box" id="messages"></div>
+        <div class="chat-input">
+          <input type="text" id="messageInput" placeholder="Nachricht eingeben...">
+          <button onclick="sendMessage()">Senden</button>
+        </div>
       </div>
     </section>
 
@@ -44,6 +61,9 @@
       <ul id="classMembers"></ul>
       <div class="input-row">
         <input type="text" id="newMember" placeholder="Name hinzufügen">
+        <input type="email" id="memberEmail" placeholder="E-Mail (optional)">
+        <input type="tel" id="memberPhone" placeholder="Telefon (optional)">
+        <label><input type="checkbox" id="isSick"> Krank heute</label>
         <button onclick="addMember()">+</button>
       </div>
     </section>
@@ -53,7 +73,9 @@
       <h1>📚 Hausaufgaben</h1>
       <ul id="homeworkList"></ul>
       <div class="input-row">
-        <input type="text" id="homeworkInput" placeholder="Neue Hausaufgabe">
+        <input type="text" id="homeworkSubject" placeholder="Fach">
+        <input type="text" id="homeworkDesc" placeholder="Beschreibung">
+        <input type="date" id="homeworkDue">
         <button onclick="addHomework()">+</button>
       </div>
     </section>
@@ -61,7 +83,7 @@
     <!-- Stundenplan -->
     <section id="timetable" class="page hidden">
       <h1>🗓️ Stundenplan</h1>
-      <iframe src="https://example.com" class="iframe"></iframe>
+      <iframe id="timetableIframe" src="https://example.com" class="iframe"></iframe>
     </section>
 
   </main>
